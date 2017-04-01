@@ -31,6 +31,11 @@ namespace drugaApka
                 defaults: new { Controller = "ManageCars", action = "RemoveAll" }
             );
 
+            routes.MapRoute(
+                name: "SearchCars",
+                url: "Search",
+                defaults: new { Controller = "ManageCars", action = "Search" }
+            );
 
             routes.MapRoute(
                 name: "Default",
