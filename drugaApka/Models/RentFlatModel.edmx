@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RentFlatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BALANCESSet">
+          <Key>
+            <PropertyRef Name="BALANCE_ID" />
+          </Key>
+          <Property Name="BALANCE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="validFrom" Type="date" Nullable="false" />
+          <Property Name="validTo" Type="date" />
+          <Property Name="value" Type="float" Nullable="false" />
+          <Property Name="PAYS_PAY_ID" Type="int" Nullable="false" />
+          <Property Name="USERS_USER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXPENSESSet">
+          <Key>
+            <PropertyRef Name="EXPENSE_ID" />
+          </Key>
+          <Property Name="EXPENSE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentalFee" Type="float" />
+          <Property Name="Rent" Type="float" />
+          <Property Name="CurrentBill" Type="float" />
+          <Property Name="GasBill" Type="float" />
+          <Property Name="InternetBill" Type="float" />
+          <Property Name="ExpenseDate" Type="date" Nullable="false" />
+          <Property Name="ExpensePerMonth" Type="date" Nullable="false" />
+          <Property Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXTRA_EXPENSESSet">
+          <Key>
+            <PropertyRef Name="EXTRA_EXPENSES_ID" />
+          </Key>
+          <Property Name="EXTRA_EXPENSES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAYSSet">
+          <Key>
+            <PropertyRef Name="PAY_ID" />
+          </Key>
+          <Property Name="PAY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="USERS_USER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS_EXPENSESSet">
+          <Key>
+            <PropertyRef Name="ID_US_EXP" />
+          </Key>
+          <Property Name="ID_US_EXP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERS_USER_ID" Type="int" Nullable="false" />
+          <Property Name="EXPENSES_EXPENSE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERSSet">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EXPENSESUSERS_EXPENSES">
+          <End Role="EXPENSESSet" Type="Self.EXPENSESSet" Multiplicity="1" />
+          <End Role="USERS_EXPENSESSet" Type="Self.USERS_EXPENSESSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXPENSESSet">
+              <PropertyRef Name="EXPENSE_ID" />
+            </Principal>
+            <Dependent Role="USERS_EXPENSESSet">
+              <PropertyRef Name="EXPENSES_EXPENSE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXTRA_EXPENSESEXPENSES">
+          <End Role="EXTRA_EXPENSESSet" Type="Self.EXTRA_EXPENSESSet" Multiplicity="1" />
+          <End Role="EXPENSESSet" Type="Self.EXPENSESSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXTRA_EXPENSESSet">
+              <PropertyRef Name="EXTRA_EXPENSES_ID" />
+            </Principal>
+            <Dependent Role="EXPENSESSet">
+              <PropertyRef Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYSBALANCES">
+          <End Role="PAYSSet" Type="Self.PAYSSet" Multiplicity="1" />
+          <End Role="BALANCESSet" Type="Self.BALANCESSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYSSet">
+              <PropertyRef Name="PAY_ID" />
+            </Principal>
+            <Dependent Role="BALANCESSet">
+              <PropertyRef Name="PAYS_PAY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERSBALANCES">
+          <End Role="USERSSet" Type="Self.USERSSet" Multiplicity="1" />
+          <End Role="BALANCESSet" Type="Self.BALANCESSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERSSet">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="BALANCESSet">
+              <PropertyRef Name="USERS_USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERSPAYS">
+          <End Role="USERSSet" Type="Self.USERSSet" Multiplicity="1" />
+          <End Role="PAYSSet" Type="Self.PAYSSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERSSet">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PAYSSet">
+              <PropertyRef Name="USERS_USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERSUSERS_EXPENSES">
+          <End Role="USERSSet" Type="Self.USERSSet" Multiplicity="1" />
+          <End Role="USERS_EXPENSESSet" Type="Self.USERS_EXPENSESSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERSSet">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="USERS_EXPENSESSet">
+              <PropertyRef Name="USERS_USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentFlatModelStoreContainer">
+          <EntitySet Name="BALANCESSet" EntityType="Self.BALANCESSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPENSESSet" EntityType="Self.EXPENSESSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXTRA_EXPENSESSet" EntityType="Self.EXTRA_EXPENSESSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYSSet" EntityType="Self.PAYSSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS_EXPENSESSet" EntityType="Self.USERS_EXPENSESSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERSSet" EntityType="Self.USERSSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EXPENSESUSERS_EXPENSES" Association="Self.FK_EXPENSESUSERS_EXPENSES">
+            <End Role="EXPENSESSet" EntitySet="EXPENSESSet" />
+            <End Role="USERS_EXPENSESSet" EntitySet="USERS_EXPENSESSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXTRA_EXPENSESEXPENSES" Association="Self.FK_EXTRA_EXPENSESEXPENSES">
+            <End Role="EXTRA_EXPENSESSet" EntitySet="EXTRA_EXPENSESSet" />
+            <End Role="EXPENSESSet" EntitySet="EXPENSESSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYSBALANCES" Association="Self.FK_PAYSBALANCES">
+            <End Role="PAYSSet" EntitySet="PAYSSet" />
+            <End Role="BALANCESSet" EntitySet="BALANCESSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERSBALANCES" Association="Self.FK_USERSBALANCES">
+            <End Role="USERSSet" EntitySet="USERSSet" />
+            <End Role="BALANCESSet" EntitySet="BALANCESSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERSPAYS" Association="Self.FK_USERSPAYS">
+            <End Role="USERSSet" EntitySet="USERSSet" />
+            <End Role="PAYSSet" EntitySet="PAYSSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERSUSERS_EXPENSES" Association="Self.FK_USERSUSERS_EXPENSES">
+            <End Role="USERSSet" EntitySet="USERSSet" />
+            <End Role="USERS_EXPENSESSet" EntitySet="USERS_EXPENSESSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="RentFlatModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="RentFlatModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BALANCESSet" EntityType="RentFlatModel.BALANCES" />
+          <EntitySet Name="PAYSSet" EntityType="RentFlatModel.PAYS" />
+          <AssociationSet Name="PAYSBALANCES" Association="RentFlatModel.PAYSBALANCES">
+            <End Role="PAYS" EntitySet="PAYSSet" />
+            <End Role="BALANCES" EntitySet="BALANCESSet" />
+          </AssociationSet>
+          <EntitySet Name="USERSSet" EntityType="RentFlatModel.USERS" />
+          <AssociationSet Name="USERSPAYS" Association="RentFlatModel.USERSPAYS">
+            <End Role="USERS" EntitySet="USERSSet" />
+            <End Role="PAYS" EntitySet="PAYSSet" />
+          </AssociationSet>
+          <AssociationSet Name="USERSBALANCES" Association="RentFlatModel.USERSBALANCES">
+            <End Role="USERS" EntitySet="USERSSet" />
+            <End Role="BALANCES" EntitySet="BALANCESSet" />
+          </AssociationSet>
+          <EntitySet Name="EXPENSESSet" EntityType="RentFlatModel.EXPENSES" />
+          <EntitySet Name="USERS_EXPENSESSet" EntityType="RentFlatModel.USERS_EXPENSES" />
+          <AssociationSet Name="USERSUSERS_EXPENSES" Association="RentFlatModel.USERSUSERS_EXPENSES">
+            <End Role="USERS" EntitySet="USERSSet" />
+            <End Role="USERS_EXPENSES" EntitySet="USERS_EXPENSESSet" />
+          </AssociationSet>
+          <AssociationSet Name="EXPENSESUSERS_EXPENSES" Association="RentFlatModel.EXPENSESUSERS_EXPENSES">
+            <End Role="EXPENSES" EntitySet="EXPENSESSet" />
+            <End Role="USERS_EXPENSES" EntitySet="USERS_EXPENSESSet" />
+          </AssociationSet>
+          <EntitySet Name="EXTRA_EXPENSESSet" EntityType="RentFlatModel.EXTRA_EXPENSES" />
+          <AssociationSet Name="EXTRA_EXPENSESEXPENSES" Association="RentFlatModel.EXTRA_EXPENSESEXPENSES">
+            <End Role="EXTRA_EXPENSES" EntitySet="EXTRA_EXPENSESSet" />
+            <End Role="EXPENSES" EntitySet="EXPENSESSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PAYS">
+          <Key>
+            <PropertyRef Name="PAY_ID" />
+          </Key>
+          <Property Name="PAY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BALANCES" Relationship="RentFlatModel.PAYSBALANCES" FromRole="PAYS" ToRole="BALANCES" />
+          <NavigationProperty Name="USERS" Relationship="RentFlatModel.USERSPAYS" FromRole="PAYS" ToRole="USERS" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BALANCES">
+          <Key>
+            <PropertyRef Name="BALANCE_ID" />
+          </Key>
+          <Property Name="BALANCE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="validFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="validTo" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="Single" Nullable="false" />
+          <NavigationProperty Name="PAYS" Relationship="RentFlatModel.PAYSBALANCES" FromRole="BALANCES" ToRole="PAYS" />
+          <NavigationProperty Name="USERS" Relationship="RentFlatModel.USERSBALANCES" FromRole="BALANCES" ToRole="USERS" />
+        </EntityType>
+        <Association Name="PAYSBALANCES">
+          <End Type="RentFlatModel.PAYS" Role="PAYS" Multiplicity="1" />
+          <End Type="RentFlatModel.BALANCES" Role="BALANCES" Multiplicity="*" />
+        </Association>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PAYS" Relationship="RentFlatModel.USERSPAYS" FromRole="USERS" ToRole="PAYS" />
+          <NavigationProperty Name="BALANCES" Relationship="RentFlatModel.USERSBALANCES" FromRole="USERS" ToRole="BALANCES" />
+          <NavigationProperty Name="USERS_EXPENSES" Relationship="RentFlatModel.USERSUSERS_EXPENSES" FromRole="USERS" ToRole="USERS_EXPENSES" />
+        </EntityType>
+        <Association Name="USERSPAYS">
+          <End Type="RentFlatModel.USERS" Role="USERS" Multiplicity="1" />
+          <End Type="RentFlatModel.PAYS" Role="PAYS" Multiplicity="*" />
+        </Association>
+        <Association Name="USERSBALANCES">
+          <End Type="RentFlatModel.USERS" Role="USERS" Multiplicity="1" />
+          <End Type="RentFlatModel.BALANCES" Role="BALANCES" Multiplicity="*" />
+        </Association>
+        <EntityType Name="EXPENSES">
+          <Key>
+            <PropertyRef Name="EXPENSE_ID" />
+          </Key>
+          <Property Name="EXPENSE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentalFee" Type="Single" />
+          <Property Name="Rent" Type="Single" />
+          <Property Name="CurrentBill" Type="Single" />
+          <Property Name="GasBill" Type="Single" />
+          <Property Name="InternetBill" Type="Single" />
+          <Property Name="ExpenseDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="ExpensePerMonth" Type="DateTime" Precision="0" Nullable="false" />
+          <NavigationProperty Name="USERS_EXPENSES" Relationship="RentFlatModel.EXPENSESUSERS_EXPENSES" FromRole="EXPENSES" ToRole="USERS_EXPENSES" />
+          <NavigationProperty Name="EXTRA_EXPENSES" Relationship="RentFlatModel.EXTRA_EXPENSESEXPENSES" FromRole="EXPENSES" ToRole="EXTRA_EXPENSES" />
+        </EntityType>
+        <EntityType Name="USERS_EXPENSES">
+          <Key>
+            <PropertyRef Name="ID_US_EXP" />
+          </Key>
+          <Property Name="ID_US_EXP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="USERS" Relationship="RentFlatModel.USERSUSERS_EXPENSES" FromRole="USERS_EXPENSES" ToRole="USERS" />
+          <NavigationProperty Name="EXPENSES" Relationship="RentFlatModel.EXPENSESUSERS_EXPENSES" FromRole="USERS_EXPENSES" ToRole="EXPENSES" />
+        </EntityType>
+        <Association Name="USERSUSERS_EXPENSES">
+          <End Type="RentFlatModel.USERS" Role="USERS" Multiplicity="1" />
+          <End Type="RentFlatModel.USERS_EXPENSES" Role="USERS_EXPENSES" Multiplicity="*" />
+        </Association>
+        <Association Name="EXPENSESUSERS_EXPENSES">
+          <End Type="RentFlatModel.EXPENSES" Role="EXPENSES" Multiplicity="1" />
+          <End Type="RentFlatModel.USERS_EXPENSES" Role="USERS_EXPENSES" Multiplicity="*" />
+        </Association>
+        <EntityType Name="EXTRA_EXPENSES">
+          <Key>
+            <PropertyRef Name="EXTRA_EXPENSES_ID" />
+          </Key>
+          <Property Name="EXTRA_EXPENSES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="Single" Nullable="false" />
+          <NavigationProperty Name="EXPENSES" Relationship="RentFlatModel.EXTRA_EXPENSESEXPENSES" FromRole="EXTRA_EXPENSES" ToRole="EXPENSES" />
+        </EntityType>
+        <Association Name="EXTRA_EXPENSESEXPENSES">
+          <End Type="RentFlatModel.EXTRA_EXPENSES" Role="EXTRA_EXPENSES" Multiplicity="1" />
+          <End Type="RentFlatModel.EXPENSES" Role="EXPENSES" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RentFlatModelStoreContainer" CdmEntityContainer="RentFlatModelContainer">
+    <EntitySetMapping Name="BALANCESSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.BALANCES)">
+        <MappingFragment StoreEntitySet="BALANCESSet">
+          <ScalarProperty Name="BALANCE_ID" ColumnName="BALANCE_ID" />
+          <ScalarProperty Name="validFrom" ColumnName="validFrom" />
+          <ScalarProperty Name="validTo" ColumnName="validTo" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAYSSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.PAYS)">
+        <MappingFragment StoreEntitySet="PAYSSet">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="PAY_ID" ColumnName="PAY_ID" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERSSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.USERS)">
+        <MappingFragment StoreEntitySet="USERSSet">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXPENSESSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.EXPENSES)">
+        <MappingFragment StoreEntitySet="EXPENSESSet">
+          <ScalarProperty Name="EXPENSE_ID" ColumnName="EXPENSE_ID" />
+          <ScalarProperty Name="RentalFee" ColumnName="RentalFee" />
+          <ScalarProperty Name="Rent" ColumnName="Rent" />
+          <ScalarProperty Name="CurrentBill" ColumnName="CurrentBill" />
+          <ScalarProperty Name="GasBill" ColumnName="GasBill" />
+          <ScalarProperty Name="InternetBill" ColumnName="InternetBill" />
+          <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+          <ScalarProperty Name="ExpensePerMonth" ColumnName="ExpensePerMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS_EXPENSESSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.USERS_EXPENSES)">
+        <MappingFragment StoreEntitySet="USERS_EXPENSESSet">
+          <ScalarProperty Name="ID_US_EXP" ColumnName="ID_US_EXP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXTRA_EXPENSESSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RentFlatModel.EXTRA_EXPENSES)">
+        <MappingFragment StoreEntitySet="EXTRA_EXPENSESSet">
+          <ScalarProperty Name="EXTRA_EXPENSES_ID" ColumnName="EXTRA_EXPENSES_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PAYSBALANCES" TypeName="RentFlatModel.PAYSBALANCES" StoreEntitySet="BALANCESSet">
+      <EndProperty Name="PAYS">
+        <ScalarProperty Name="PAY_ID" ColumnName="PAYS_PAY_ID" />
+      </EndProperty>
+      <EndProperty Name="BALANCES">
+        <ScalarProperty Name="BALANCE_ID" ColumnName="BALANCE_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="USERSPAYS" TypeName="RentFlatModel.USERSPAYS" StoreEntitySet="PAYSSet">
+      <EndProperty Name="USERS">
+        <ScalarProperty Name="USER_ID" ColumnName="USERS_USER_ID" />
+      </EndProperty>
+      <EndProperty Name="PAYS">
+        <ScalarProperty Name="PAY_ID" ColumnName="PAY_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="USERSBALANCES" TypeName="RentFlatModel.USERSBALANCES" StoreEntitySet="BALANCESSet">
+      <EndProperty Name="USERS">
+        <ScalarProperty Name="USER_ID" ColumnName="USERS_USER_ID" />
+      </EndProperty>
+      <EndProperty Name="BALANCES">
+        <ScalarProperty Name="BALANCE_ID" ColumnName="BALANCE_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="USERSUSERS_EXPENSES" TypeName="RentFlatModel.USERSUSERS_EXPENSES" StoreEntitySet="USERS_EXPENSESSet">
+      <EndProperty Name="USERS">
+        <ScalarProperty Name="USER_ID" ColumnName="USERS_USER_ID" />
+      </EndProperty>
+      <EndProperty Name="USERS_EXPENSES">
+        <ScalarProperty Name="ID_US_EXP" ColumnName="ID_US_EXP" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EXPENSESUSERS_EXPENSES" TypeName="RentFlatModel.EXPENSESUSERS_EXPENSES" StoreEntitySet="USERS_EXPENSESSet">
+      <EndProperty Name="EXPENSES">
+        <ScalarProperty Name="EXPENSE_ID" ColumnName="EXPENSES_EXPENSE_ID" />
+      </EndProperty>
+      <EndProperty Name="USERS_EXPENSES">
+        <ScalarProperty Name="ID_US_EXP" ColumnName="ID_US_EXP" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EXTRA_EXPENSESEXPENSES" TypeName="RentFlatModel.EXTRA_EXPENSESEXPENSES" StoreEntitySet="EXPENSESSet">
+      <EndProperty Name="EXTRA_EXPENSES">
+        <ScalarProperty Name="EXTRA_EXPENSES_ID" ColumnName="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" />
+      </EndProperty>
+      <EndProperty Name="EXPENSES">
+        <ScalarProperty Name="EXPENSE_ID" ColumnName="EXPENSE_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

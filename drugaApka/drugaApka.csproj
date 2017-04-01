@@ -154,10 +154,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageCarsController.cs" />
+    <Compile Include="Controllers\RentFlatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BALANCES.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CarModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,8 +177,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EXPENSES.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EXTRA_EXPENSES.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAYS.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentFlatModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentFlatModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentFlatModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RentFlatModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RentFlatModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Samochod.cs">
       <DependentUpon>CarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USERS.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USERS_EXPENSES.cs">
+      <DependentUpon>RentFlatModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,6 +229,17 @@
       <DependentUpon>CarModel.edmx</DependentUpon>
       <LastGenOutput>CarModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\RentFlatModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RentFlatModel.Context.cs</LastGenOutput>
+      <DependentUpon>RentFlatModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\RentFlatModel.edmx.sql" />
+    <Content Include="Models\RentFlatModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RentFlatModel.cs</LastGenOutput>
+      <DependentUpon>RentFlatModel.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -206,6 +251,13 @@
     </EntityDeploy>
     <Content Include="Models\CarModel.edmx.diagram">
       <DependentUpon>CarModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\RentFlatModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RentFlatModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RentFlatModel.edmx.diagram">
+      <DependentUpon>RentFlatModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -233,6 +285,8 @@
     <Content Include="Views\ManageCars\Add.cshtml" />
     <Content Include="Views\ManageCars\View.cshtml" />
     <Content Include="Views\ManageCars\Search.cshtml" />
+    <Content Include="Views\RentFlat\Index.cshtml" />
+    <Content Include="Views\RentFlat\PayMoney.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
