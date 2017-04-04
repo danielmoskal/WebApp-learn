@@ -152,6 +152,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageCarsController.cs" />
     <Compile Include="Controllers\RentFlatController.cs" />
@@ -287,7 +288,9 @@
     <Content Include="Views\ManageCars\Search.cshtml" />
     <Content Include="Views\RentFlat\Index.cshtml" />
     <Content Include="Views\RentFlat\PayMoney.cshtml" />
-    <Content Include="Views\RentFlat\Expenses.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\Expenses\SearchDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

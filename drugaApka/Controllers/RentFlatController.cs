@@ -20,13 +20,5 @@ namespace drugaApka.Controllers
         {
             return View();
         }
-
-        public ActionResult Expenses()
-        {
-            RentFlatModelContainer db = new RentFlatModelContainer();
-            var expenses = db.EXPENSESSet;
-            var extra = db.EXTRA_EXPENSESSet;
-            return View(expenses);
-        }
     }
 }

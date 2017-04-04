@@ -13,30 +13,6 @@ namespace drugaApka
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    name: "AddCar",
-            //    url: "Dodaj",
-            //    defaults: new { Controller = "ManageCars", action = "Add" }
-            //);
-
-            //routes.MapRoute(
-            //    name: "VievCars",
-            //    url: "Wyswietl",
-            //    defaults: new { Controller = "ManageCars", action = "View" }
-            //);
-
-            //routes.MapRoute(
-            //    name: "RemoveCar",
-            //    url: "Usun",
-            //    defaults: new { Controller = "ManageCars", action = "RemoveAll" }
-            //);
-
-            //routes.MapRoute(
-            //    name: "SearchCars",
-            //    url: "Szukaj",
-            //    defaults: new { Controller = "ManageCars", action = "Search" }
-            //);
-
             routes.MapRoute(
                 name: "Wydatki",
                 url: "Expense",
