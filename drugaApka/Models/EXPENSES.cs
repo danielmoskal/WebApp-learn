@@ -27,7 +27,7 @@ namespace drugaApka.Models
         public Nullable<float> GasBill { get; set; }
         public Nullable<float> InternetBill { get; set; }
         public System.DateTime ExpenseDate { get; set; }
-        public System.DateTime ExpensePerMonth { get; set; }
+        public string ExpensePerMonth { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USERS_EXPENSES> USERS_EXPENSES { get; set; }

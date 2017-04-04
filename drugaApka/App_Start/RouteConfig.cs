@@ -13,28 +13,40 @@ namespace drugaApka
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "AddCar",
+            //    url: "Dodaj",
+            //    defaults: new { Controller = "ManageCars", action = "Add" }
+            //);
+
+            //routes.MapRoute(
+            //    name: "VievCars",
+            //    url: "Wyswietl",
+            //    defaults: new { Controller = "ManageCars", action = "View" }
+            //);
+
+            //routes.MapRoute(
+            //    name: "RemoveCar",
+            //    url: "Usun",
+            //    defaults: new { Controller = "ManageCars", action = "RemoveAll" }
+            //);
+
+            //routes.MapRoute(
+            //    name: "SearchCars",
+            //    url: "Szukaj",
+            //    defaults: new { Controller = "ManageCars", action = "Search" }
+            //);
+
             routes.MapRoute(
-                name: "AddCar",
-                url: "Dodaj",
-                defaults: new { Controller = "ManageCars", action = "Add" }
+                name: "Wydatki",
+                url: "Expense",
+                defaults: new { Controller = "RentFlat", action = "Expenses" }
             );
 
             routes.MapRoute(
-                name: "VievCars",
-                url: "Wyswietl",
-                defaults: new { Controller = "ManageCars", action = "View" }
-            );
-
-            routes.MapRoute(
-                name: "RemoveCar",
-                url: "Usun",
-                defaults: new { Controller = "ManageCars", action = "RemoveAll" }
-            );
-
-            routes.MapRoute(
-                name: "SearchCars",
-                url: "Search",
-                defaults: new { Controller = "ManageCars", action = "Search" }
+                name: "Wpłaty",
+                url: "Pay",
+                defaults: new { Controller = "RentFlat", action = "PayMoney" }
             );
 
             routes.MapRoute(

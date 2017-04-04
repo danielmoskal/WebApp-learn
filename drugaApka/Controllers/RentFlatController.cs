@@ -1,7 +1,9 @@
-﻿using System;
+﻿using drugaApka.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.HtmlControls;
 using System.Web.Mvc;
 
 namespace drugaApka.Controllers
@@ -17,6 +19,14 @@ namespace drugaApka.Controllers
         public ActionResult PayMoney()
         {
             return View();
+        }
+
+        public ActionResult Expenses()
+        {
+            RentFlatModelContainer db = new RentFlatModelContainer();
+            var expenses = db.EXPENSESSet;
+            var extra = db.EXTRA_EXPENSESSet;
+            return View(expenses);
         }
     }
 }

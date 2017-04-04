@@ -1,0 +1,72 @@
+﻿@model IEnumerable<drugaApka.Models.EXPENSES>
+
+@{
+    ViewBag.Title = "Wydatki";
+}
+
+<h2>Wydatki</h2>
+
+@*@foreach (var item in Model)
+    {
+        <p><font size="4"><pre>@item.ExpensePerMonth @item.RentalFee @item.Rent @item.CurrentBill @item.GasBill @item.InternetBill</pre></font></p>
+    }*@
+
+<table width="100%" cellspacing="0" cellpadding="10">
+    <tr>
+        <td width="50" bgcolor="#00C0F0" align="center">Miesiąc</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Wynajem</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Czynsz</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Prąd</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Gaz</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Internet</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Data zapłaty</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @for (int i = 0; i < 7; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.ExpensePerMonth
+                        </td>
+                        break;
+                    case 1:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.RentalFee
+                        </td>
+                        break;
+                    case 2:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.Rent
+                        </td>
+                        break;
+                    case 3:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.CurrentBill
+                        </td>
+                        break;
+                    case 4:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.GasBill
+                        </td>
+                        break;
+                    case 5:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.InternetBill
+                        </td>
+                        break;
+                    case 6:
+                        <td bgcolor="white" width="50" align="center">
+                            @item.ExpenseDate.ToString("dd/MM/yyyy")
+                        </td>
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </tr>
+    }
+</table>

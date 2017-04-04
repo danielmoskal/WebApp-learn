@@ -27,14 +27,14 @@
           <Property Name="GasBill" Type="float" />
           <Property Name="InternetBill" Type="float" />
           <Property Name="ExpenseDate" Type="date" Nullable="false" />
-          <Property Name="ExpensePerMonth" Type="date" Nullable="false" />
-          <Property Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" Type="int" Nullable="false" />
+          <Property Name="ExpensePerMonth" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" Type="int" />
         </EntityType>
         <EntityType Name="EXTRA_EXPENSESSet">
           <Key>
             <PropertyRef Name="EXTRA_EXPENSES_ID" />
           </Key>
-          <Property Name="EXTRA_EXPENSES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EXTRA_EXPENSES_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
         </EntityType>
@@ -76,7 +76,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXTRA_EXPENSESEXPENSES">
-          <End Role="EXTRA_EXPENSESSet" Type="Self.EXTRA_EXPENSESSet" Multiplicity="1" />
+          <End Role="EXTRA_EXPENSESSet" Type="Self.EXTRA_EXPENSESSet" Multiplicity="0..1" />
           <End Role="EXPENSESSet" Type="Self.EXPENSESSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EXTRA_EXPENSESSet">
@@ -258,7 +258,7 @@
           <Property Name="GasBill" Type="Single" />
           <Property Name="InternetBill" Type="Single" />
           <Property Name="ExpenseDate" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="ExpensePerMonth" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="ExpensePerMonth" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="USERS_EXPENSES" Relationship="RentFlatModel.EXPENSESUSERS_EXPENSES" FromRole="EXPENSES" ToRole="USERS_EXPENSES" />
           <NavigationProperty Name="EXTRA_EXPENSES" Relationship="RentFlatModel.EXTRA_EXPENSESEXPENSES" FromRole="EXPENSES" ToRole="EXTRA_EXPENSES" />
         </EntityType>
