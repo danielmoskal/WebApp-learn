@@ -60,7 +60,7 @@ namespace drugaApka.Controllers
         public ActionResult SearchDetails(string miesiac, string data)
         {
             System.DateTime date;
-            if (!System.DateTime.TryParse(data, out date) && data != "")
+            if (!System.DateTime.TryParse(data, out date) && data != "" && data != null)
                 return View("SearchDetails");
             RentFlatModelContainer db = new RentFlatModelContainer();
             var expenses = db.EXPENSESSet;

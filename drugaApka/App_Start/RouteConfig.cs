@@ -14,12 +14,6 @@ namespace drugaApka
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Wydatki",
-                url: "Expense",
-                defaults: new { Controller = "RentFlat", action = "Expenses" }
-            );
-
-            routes.MapRoute(
                 name: "Wpłaty",
                 url: "Pay",
                 defaults: new { Controller = "RentFlat", action = "PayMoney" }
