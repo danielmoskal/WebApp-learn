@@ -303,6 +303,7 @@
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Expenses\SearchDetails.cshtml" />
     <Content Include="Views\Expenses\Redirect.cshtml" />
+    <Content Include="Views\Expenses\ExtraExpenses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

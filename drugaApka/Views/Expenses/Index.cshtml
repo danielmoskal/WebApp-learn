@@ -2,6 +2,17 @@
 @{
     ViewBag.Title = "Wydatki";
 }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
 <div class="container">
     <div class="row">
         <a class="btn btn-primary btn-lg" href="~/Expenses/SearchDetails">Szczegółowe wydatki</a><button class="btn btn-default btn-lg">Inny</button>
@@ -49,15 +60,16 @@
                                 <th>@item.InternetBill</th>
                                 break;
                             case 6:
-                                <th>cos</th>
+                                <th>@Html.ActionLink("CLICK", "ExtraExpenses", "Expenses", new { month = item.ExpensePerMonth},null)</th>
                                 break;
                             default:
                                 break;
-                        }
-                    }
+                                    }
+                                }
                 </tr>
             }
         </tbody>
     </table>
 </div>
+</html>
 

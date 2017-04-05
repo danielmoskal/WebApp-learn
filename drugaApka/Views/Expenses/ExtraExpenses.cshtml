@@ -1,0 +1,56 @@
+﻿@model IEnumerable<drugaApka.Models.EXPENSES>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ExtraExpenses</title>
+</head>
+<body>
+
+    <p><h2>Dodatkowe wydatki</h2></p>
+
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Miesiac</th>
+                    <th>Nazwa</th>
+                    <th>Wartosc</th>
+                    <th>Data zapłaty</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        @for (int i = 0; i < 4; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    <th>@item.ExpensePerMonth</th>
+                                    break;
+                                case 1:
+                                    <th>@item.EXTRA_EXPENSES.Name</th>
+                                    break;
+                                case 2:
+                                    <th>@item.EXTRA_EXPENSES.Value</th>
+                                    break;
+                                case 3:
+                                    <th>@item.ExpenseDate.ToString("dd/MM/yyy")</th>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+</html>

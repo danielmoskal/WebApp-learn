@@ -43,8 +43,6 @@ namespace drugaApka.Controllers
                             entity.RentalFee = item.RentalFee;
                     }
                     exp.Add(entity);
-                    //IEnumerable<EXPENSES> expp;
-                    //expp = exp;
                 }
             }
             return View(exp);
@@ -73,6 +71,21 @@ namespace drugaApka.Controllers
                 return View("Details", expenses.OrderBy(P=>P.ExpenseDate));
             else
                 return View();
+        }
+
+
+        public ActionResult ExtraExpenses(string month)
+        {
+            RentFlatModelContainer db = new RentFlatModelContainer();
+            List<EXTRA_EXPENSES> extraList = new List<EXTRA_EXPENSES>();
+            var expenses = db.EXPENSESSet;
+            var extraExpenses = expenses.Where(p => p.EXTRA_EXPENSES != null);
+            if (month != null && month != "")
+            {
+                var extra = expenses.Where(p=>p.EXTRA_EXPENSES != null && p.ExpensePerMonth == month);
+                return View(extra.OrderBy(p => p.ExpenseDate));
+            }
+            return View(extraExpenses.OrderBy(p=>p.ExpenseDate));
         }
     }
 }
