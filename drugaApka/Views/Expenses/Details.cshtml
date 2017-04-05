@@ -6,7 +6,7 @@
 
 <p><h2>Szukane wydatki</h2></p>
 
-<table width="100%" cellspacing="0" cellpadding="10">
+<table width="100%" cellspacing="0" cellpadding="10" border="1">
     <tr>
         <td width="50" bgcolor="#00C0F0" align="center">Miesiąc</td>
         <td width="50" bgcolor="#00C0F0" align="center">Wynajem</td>
@@ -14,12 +14,13 @@
         <td width="50" bgcolor="#00C0F0" align="center">Prąd</td>
         <td width="50" bgcolor="#00C0F0" align="center">Gaz</td>
         <td width="50" bgcolor="#00C0F0" align="center">Internet</td>
+        <td width="50" bgcolor="#00C0F0" align="center">Dodatkowe</td>
         <td width="50" bgcolor="#00C0F0" align="center">Data zapłaty</td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            @for (int i = 0; i < 7; i++)
+            @for (int i = 0; i < 8; i++)
             {
                 switch (i)
                 {
@@ -54,6 +55,14 @@
                         </td>
                         break;
                     case 6:
+                        <td bgcolor="white" width="50" align="center">
+                            @if (@item.EXTRA_EXPENSES != null)
+                            {
+                                <p>@item.EXTRA_EXPENSES.Name - @item.EXTRA_EXPENSES.Value</p>
+                            }
+                        </td>
+                        break;
+                    case 7:
                         <td bgcolor="white" width="50" align="center">
                             @item.ExpenseDate.ToString("dd/MM/yyyy")
                         </td>

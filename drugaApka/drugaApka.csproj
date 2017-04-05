@@ -184,6 +184,7 @@
     <Compile Include="Models\EXTRA_EXPENSES.cs">
       <DependentUpon>RentFlatModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Month.cs" />
     <Compile Include="Models\PAYS.cs">
       <DependentUpon>RentFlatModel.tt</DependentUpon>
     </Compile>
@@ -291,6 +292,7 @@
     <Content Include="Views\Expenses\Details.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Expenses\SearchDetails.cshtml" />
+    <Content Include="Views\Expenses\Redirect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
