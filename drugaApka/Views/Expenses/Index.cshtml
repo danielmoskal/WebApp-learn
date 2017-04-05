@@ -2,78 +2,62 @@
 @{
     ViewBag.Title = "Wydatki";
 }
+<div class="container">
+    <div class="row">
+        <a class="btn btn-primary btn-lg" href="~/Expenses/SearchDetails">Szczegółowe wydatki</a><button class="btn btn-default btn-lg">Inny</button>
+        <div class="col-lg-12"><font size="5"><p class="text-center"><strong>Wydatki</strong></p></font></div>
+    </div>
+</div>
 
-<table width="100%" cellspacing="0" cellpadding="10">
-    <tr>
-        <td bgcolor="#73FFFF" width="200" align="left" valign="middle">
-            @Html.ActionLink("Szczegółowe wydatki", "SearchDetails", "Expenses")
-        </td>
-        <td bgcolor="#73FFFF" colspan="10" rowspan="2" align="center" valign="middle"><font size="5"><b>Wydatki</b></font></td>
-    </tr>
-    <tr>
-        <td bgcolor="#73FFFF" width="100" align="left" valign="middle">
-            @Html.ActionLink("inna opcja", "Expenses", "RentFlat")
-        </td>
-    </tr>
-    </table>
-<table width="100%" cellspacing="0" cellpadding="10" border="1">
-    <tr>
-
-        <td width="50" bgcolor="#00C0F0" align="center">Miesiąc</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Wynajem</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Czynsz</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Prąd</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Gaz</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Internet</td>
-        <td width="50" bgcolor="#00C0F0" align="center">Dodatkowe</td>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            @for (int i = 0; i < 7; i++)
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Miesiac</th>
+                <th>Wynajem</th>
+                <th>Czynsz</th>
+                <th>Prąd</th>
+                <th>Gaz</th>
+                <th>Internet</th>
+                <th>Dodatkowe</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                switch (i)
+                <tr>
+                    @for (int i = 0; i < 7; i++)
                 {
-                    case 0:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.ExpensePerMonth
-                        </td>
-                        break;
-                    case 1:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.RentalFee
-                        </td>
-                        break;
-                    case 2:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.Rent
-                        </td>
-                        break;
-                    case 3:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.CurrentBill
-                        </td>
-                        break;
-                    case 4:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.GasBill
-                        </td>
-                        break;
-                    case 5:
-                        <td bgcolor="white" width="50" align="center">
-                            @item.InternetBill
-                        </td>
-                        break;
-                    case 6:
-                        <td bgcolor="white" width="50" align="center">
-                            @Html.ActionLink("CLICK", "SearchDetails", "Expenses",new { miesiac = item.ExpensePerMonth},null)
-                        </td>
-                        break;
-                    default:
-                        break;
-                }
+                    switch (i)
+                    {
+                        case 0:
+                                <th>@item.ExpensePerMonth</th>
+                                break;
+                            case 1:
+                                <th>@item.RentalFee</th>
+                                break;
+                            case 2:
+                                <th>@item.Rent</th>
+                                break;
+                            case 3:
+                                <th>@item.CurrentBill</th>
+                                break;
+                            case 4:
+                                <th>@item.GasBill</th>
+                                break;
+                            case 5:
+                                <th>@item.InternetBill</th>
+                                break;
+                            case 6:
+                                <th>cos</th>
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                </tr>
             }
-        </tr>
-    }
-</table>
+        </tbody>
+    </table>
+</div>
 

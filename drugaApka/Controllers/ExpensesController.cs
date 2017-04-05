@@ -67,10 +67,10 @@ namespace drugaApka.Controllers
             if (expenses.Any(p => p.ExpensePerMonth == miesiac || p.ExpenseDate.Equals(date)))
             {
                 var searchExpenses = expenses.Where(p => p.ExpensePerMonth == miesiac || p.ExpenseDate.Equals(date));
-                return View("Details", searchExpenses);
+                return View("Details", searchExpenses.OrderBy(P => P.ExpenseDate));
             }
             if (miesiac == "" && data == "")
-                return View("Details", expenses);
+                return View("Details", expenses.OrderBy(P=>P.ExpenseDate));
             else
                 return View();
         }
