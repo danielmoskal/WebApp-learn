@@ -3,16 +3,6 @@
     ViewBag.Title = "Wydatki";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-
 <div class="container">
     <div class="row">
         <a class="btn btn-primary btn-lg" href="~/Expenses/SearchDetails">Szczegółowe wydatki</a><button class="btn btn-default btn-lg">Inny</button>
@@ -30,6 +20,8 @@
                 <th>Prąd</th>
                 <th>Gaz</th>
                 <th>Internet</th>
+                <th>Suma [zl]</th>
+                <th>na osobę [zl]</th>
                 <th>Dodatkowe</th>
             </tr>
         </thead>
@@ -37,39 +29,64 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @for (int i = 0; i < 7; i++)
-                {
-                    switch (i)
+                    @for (int i = 0; i < 9; i++)
                     {
-                        case 0:
-                                <th>@item.ExpensePerMonth</th>
-                                break;
+                        switch (i)
+                        {
+                            case 0:
+                                {
+                                    <th>@item.ExpensePerMonth</th>
+                                    break;
+                                }
                             case 1:
-                                <th>@item.RentalFee</th>
-                                break;
+                                {
+                                    <th>@item.RentalFee</th>
+                                    break;
+                                }
                             case 2:
-                                <th>@item.Rent</th>
-                                break;
+                                {
+                                    <th>@item.Rent</th>
+                                    break;
+                                }
                             case 3:
-                                <th>@item.CurrentBill</th>
-                                break;
+                                {
+                                    <th>@item.CurrentBill</th>
+                                    break;
+                                }
                             case 4:
-                                <th>@item.GasBill</th>
-                                break;
+                                {
+                                    <th>@item.GasBill</th>
+                                    break;
+                                }
                             case 5:
-                                <th>@item.InternetBill</th>
-                                break;
+                                {
+                                    <th>@item.InternetBill</th>
+                                    break;
+                                }
                             case 6:
-                                <th>@Html.ActionLink("CLICK", "ExtraExpenses", "Expenses", new { month = item.ExpensePerMonth},null)</th>
-                                break;
+                                {
+                                    var sum = item.RentalFee + item.Rent + item.CurrentBill + item.GasBill + item.InternetBill;
+                                <th>@sum</th>
+                                    break;
+                                }
+                            case 7:
+                                {
+                                    var sum = (item.RentalFee + item.Rent + item.CurrentBill + item.GasBill + item.InternetBill)/4;
+                                <th>@sum</th>
+                                    break;
+                                }
+                            case 8:
+                                {
+                                    <th>@Html.ActionLink("CLICK", "ExtraExpenses", "Expenses", new { month = item.ExpensePerMonth }, null)</th>
+                                    break;
+                                }
                             default:
                                 break;
-                                    }
-                                }
+                        }
+                    }
                 </tr>
             }
         </tbody>
     </table>
 </div>
-</html>
 
