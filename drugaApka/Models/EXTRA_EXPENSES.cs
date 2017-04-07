@@ -22,7 +22,7 @@ namespace drugaApka.Models
     
         public int EXTRA_EXPENSES_ID { get; set; }
         public string Name { get; set; }
-        public float Value { get; set; }
+        public Nullable<float> Value { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EXPENSES> EXPENSES { get; set; }

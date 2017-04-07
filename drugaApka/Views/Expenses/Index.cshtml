@@ -14,22 +14,24 @@
     <table class="table table-striped table-hover table-bordered">
         <thead>
             <tr>
-                <th>Miesiac</th>
+                <th>Miesiąc</th>
                 <th>Wynajem</th>
                 <th>Czynsz</th>
                 <th>Prąd</th>
                 <th>Gaz</th>
                 <th>Internet</th>
-                <th>Suma [zl]</th>
-                <th>na osobę [zl]</th>
+                <th>Suma</th>
                 <th>Dodatkowe</th>
+                <th>Suma łączna</th>
+                <th>na osobę</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
+                float? sum = 0;
                 <tr>
-                    @for (int i = 0; i < 9; i++)
+                    @for (int i = 0; i < 10; i++)
                     {
                         switch (i)
                         {
@@ -40,46 +42,78 @@
                                 }
                             case 1:
                                 {
-                                    <th>@item.RentalFee</th>
+                                    <th>@String.Format("{0:c}", item.RentalFee)</th>
                                     break;
                                 }
                             case 2:
                                 {
-                                    <th>@item.Rent</th>
+                                    <th>@String.Format("{0:c}", item.Rent)</th>
                                     break;
                                 }
                             case 3:
                                 {
-                                    <th>@item.CurrentBill</th>
+                                    <th>@String.Format("{0:c}", item.CurrentBill)</th>
                                     break;
                                 }
                             case 4:
                                 {
-                                    <th>@item.GasBill</th>
+                                    <th>@String.Format("{0:c}", item.GasBill)</th>
                                     break;
                                 }
                             case 5:
                                 {
-                                    <th>@item.InternetBill</th>
+                                    <th>@String.Format("{0:c}", item.InternetBill)</th>
                                     break;
                                 }
                             case 6:
                                 {
-                                    var sum = item.RentalFee + item.Rent + item.CurrentBill + item.GasBill + item.InternetBill;
-                                <th>@sum</th>
+                                    float? rentalFee, rent, current, gas, internet;
+
+                                    if (item.RentalFee == null){rentalFee = 0;}
+                                    else{rentalFee = item.RentalFee;}
+
+                                    if (item.Rent == null) { rent = 0; }
+                                    else { rent = item.Rent; }
+
+                                    if (item.CurrentBill == null) { current = 0; }
+                                    else { current = item.CurrentBill; }
+
+                                    if (item.GasBill == null) { gas = 0; }
+                                    else { gas = item.GasBill; }
+
+                                    if (item.InternetBill == null) { internet = 0; }
+                                    else { internet = item.InternetBill; }
+
+                                    sum = rentalFee + rent + current + gas + internet;
+                                    <th>@String.Format("{0:c}", sum)</th>
                                     break;
                                 }
                             case 7:
                                 {
-                                    var sum = (item.RentalFee + item.Rent + item.CurrentBill + item.GasBill + item.InternetBill)/4;
-                                <th>@sum</th>
+                                    <th class="alert-info text-center">@Html.ActionLink("CLICK", "ExtraExpenses", "Expenses", new { month = item.ExpensePerMonth }, null)</th>
                                     break;
                                 }
                             case 8:
                                 {
-                                    <th>@Html.ActionLink("CLICK", "ExtraExpenses", "Expenses", new { month = item.ExpensePerMonth }, null)</th>
+                                    var extra = ViewBag.extraExpenses as IEnumerable<drugaApka.Models.EXPENSES>;
+                                    if (extra.All(p=>p.EXTRA_EXPENSES != null))
+                                    {
+                                        sum += (extra.Where(p => p.ExpensePerMonth == item.ExpensePerMonth).Sum(p => p.EXTRA_EXPENSES.Value));
+                                        <th>@String.Format("{0:c}", sum)</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@String.Format("{0:c}", sum)</th>
+                                    }
                                     break;
                                 }
+                            case 9:
+                                {
+                                        var sum9 = sum / 4;
+                                        <th>@String.Format("{0:c}", sum9)</th>
+                                    break;
+                                }
+
                             default:
                                 break;
                         }

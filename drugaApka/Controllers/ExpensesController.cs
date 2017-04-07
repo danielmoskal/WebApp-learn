@@ -13,19 +13,19 @@ namespace drugaApka.Controllers
         public ActionResult Index()
         {
             List<Month> months = new List<Month>();
-            months.Add(new Month { MonthID = 1, MonthName = "Styczen" });
+            months.Add(new Month { MonthID = 1, MonthName = "Styczeń" });
             months.Add(new Month { MonthID = 2, MonthName = "Luty" });
             months.Add(new Month { MonthID = 3, MonthName = "Marzec" });
-            months.Add(new Month { MonthID = 4, MonthName = "Kwiecien" });
+            months.Add(new Month { MonthID = 4, MonthName = "Kwiecień" });
 
             RentFlatModelContainer db = new RentFlatModelContainer();
             var expenses = db.EXPENSESSet;
             List<EXPENSES> exp = new List<EXPENSES>();
             foreach (var x in months)
             {
-                if (expenses.Any(p => p.ExpensePerMonth == x.MonthName))
+                if (expenses.Any(p => p.ExpensePerMonth.ToLower() == x.MonthName.ToLower()))
                 {
-                    var currentExpense = expenses.RemoveRange(expenses.Where(p => p.ExpensePerMonth == x.MonthName));
+                    var currentExpense = expenses.RemoveRange(expenses.Where(p => p.ExpensePerMonth.ToLower() == x.MonthName.ToLower()));
                     EXPENSES entity = new EXPENSES();
                     foreach (var item in currentExpense)
                     {
@@ -45,6 +45,9 @@ namespace drugaApka.Controllers
                     exp.Add(entity);
                 }
             }
+            RentFlatModelContainer db2 = new RentFlatModelContainer();
+            var ex = db2.EXPENSESSet;
+            ViewBag.extraExpenses = ex.Where(p => p.EXTRA_EXPENSES != null);
             return View(exp);
         }
 
@@ -55,24 +58,32 @@ namespace drugaApka.Controllers
             return View(expenses);
         }
 
-        public ActionResult SearchDetails(string miesiac, string data)
+
+        /// <summary>
+        /// This function downloads data from html-form and shows right result, which are compatible with primary data
+        /// </summary>
+        /// <param name="month"></param>
+        /// month downloaded from html-form
+        /// <param name="date"></param>
+        /// date downloaded from html form
+        /// <returns></returns>
+        public ActionResult SearchDetails(string month, string date)
         {
-            System.DateTime date;
-            if (!System.DateTime.TryParse(data, out date) && data != "" && data != null)
+            System.DateTime date2;
+            if (!System.DateTime.TryParse(date, out date2) && date != "" && date2 != null)
                 return View("SearchDetails");
             RentFlatModelContainer db = new RentFlatModelContainer();
             var expenses = db.EXPENSESSet;
-            if (expenses.Any(p => p.ExpensePerMonth == miesiac || p.ExpenseDate.Equals(date)))
+            if (expenses.Any(p => p.ExpensePerMonth == month || p.ExpenseDate.Equals(date2)))
             {
-                var searchExpenses = expenses.Where(p => p.ExpensePerMonth == miesiac || p.ExpenseDate.Equals(date));
+                var searchExpenses = expenses.Where(p => p.ExpensePerMonth == month || p.ExpenseDate.Equals(date2));
                 return View("Details", searchExpenses.OrderBy(P => P.ExpenseDate));
             }
-            if (miesiac == "" && data == "")
+            if (month == "" && date == "")
                 return View("Details", expenses.OrderBy(P=>P.ExpenseDate));
             else
                 return View();
         }
-
 
         public ActionResult ExtraExpenses(string month)
         {

@@ -28,15 +28,15 @@
           <Property Name="InternetBill" Type="float" />
           <Property Name="ExpenseDate" Type="date" Nullable="false" />
           <Property Name="ExpensePerMonth" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" Type="int" />
+          <Property Name="EXTRA_EXPENSES_EXTRA_EXPENSES_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EXTRA_EXPENSESSet">
           <Key>
             <PropertyRef Name="EXTRA_EXPENSES_ID" />
           </Key>
-          <Property Name="EXTRA_EXPENSES_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="EXTRA_EXPENSES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Value" Type="float" />
         </EntityType>
         <EntityType Name="PAYSSet">
           <Key>
@@ -76,7 +76,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXTRA_EXPENSESEXPENSES">
-          <End Role="EXTRA_EXPENSESSet" Type="Self.EXTRA_EXPENSESSet" Multiplicity="0..1" />
+          <End Role="EXTRA_EXPENSESSet" Type="Self.EXTRA_EXPENSESSet" Multiplicity="1" />
           <End Role="EXPENSESSet" Type="Self.EXPENSESSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EXTRA_EXPENSESSet">
@@ -283,8 +283,8 @@
             <PropertyRef Name="EXTRA_EXPENSES_ID" />
           </Key>
           <Property Name="EXTRA_EXPENSES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Value" Type="Single" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="Value" Type="Single" Nullable="true" />
           <NavigationProperty Name="EXPENSES" Relationship="RentFlatModel.EXTRA_EXPENSESEXPENSES" FromRole="EXTRA_EXPENSES" ToRole="EXPENSES" />
         </EntityType>
         <Association Name="EXTRA_EXPENSESEXPENSES">

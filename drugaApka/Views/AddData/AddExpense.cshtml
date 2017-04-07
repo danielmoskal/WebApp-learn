@@ -1,0 +1,99 @@
+﻿@model IEnumerable<drugaApka.Models.EXTRA_EXPENSES>
+@{
+    ViewBag.Title = "Dodaj wydatek";
+}
+
+<h2>Dodaj wydatek</h2>
+
+<p><strong>@ViewBag.error</strong></p>
+
+<div class="container">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="rentalFee" class="col-sm-2 control-label">Wynajem</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="inputRentalFee" placeholder="Opłata za mieszkanie">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rent" class="col-sm-2 control-label">Czynsz</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="inputRent" placeholder="Opłata za czynsz">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="current" class="col-sm-2 control-label">Prąd</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="inputCurrent" placeholder="Opłata za  prąd">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="gas" class="col-sm-2 control-label">Gaz</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="inputGas" placeholder="Opłata za  gaz">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="internet" class="col-sm-2 control-label">Internet</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="inputInternet" placeholder="Opłata za internet">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="date" class="col-sm-2 control-label">Data zapłaty</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" name="inputDate" >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="month" class="col-sm-2 control-label">Miesiąc</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="month">
+                    <option>Styczeń</option>
+                    <option>Luty</option>
+                    <option>Marzec</option>
+                    <option>Kwiecień</option>
+                    <option>Maj</option>
+                    <option>Czerwiec</option>
+                    <option>Lipiec</option>
+                    <option>Sierpień</option>
+                    <option>Wrzesień</option>
+                    <option>Październik</option>
+                    <option>Listopad</option>
+                    <option>Grudzień</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="extra" class="col-sm-2 control-label">Dodatkowe wydatki</label>
+            <div class="col-sm-10">
+            <select class="form-control" name="extra">
+                @foreach (var item in Model)
+                {
+                    if (item.EXTRA_EXPENSES_ID == -1)
+                    {
+                        <option value="@item.EXTRA_EXPENSES_ID">Brak!</option>
+                    }
+                    else
+                    {
+                        <option value="@item.EXTRA_EXPENSES_ID">@item.Name | @item.Value zł</option>
+                    }
+                }
+            </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Wyślij</button>
+            </div>
+        </div>
+    </form>
+</div>
