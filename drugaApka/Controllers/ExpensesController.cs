@@ -46,6 +46,7 @@ namespace drugaApka.Controllers
                 }
             }
             RentFlatModelContainer db2 = new RentFlatModelContainer();
+            
             var ex = db2.EXPENSESSet;
             ViewBag.extraExpenses = ex.Where(p => p.EXTRA_EXPENSES != null);
             return View(exp);

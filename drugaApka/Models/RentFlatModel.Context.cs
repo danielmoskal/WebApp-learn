@@ -16,7 +16,7 @@ namespace drugaApka.Models
     public partial class RentFlatModelContainer : DbContext
     {
         public RentFlatModelContainer()
-            : base("name=RentFlatModelContainer")
+            : base("name=RentFlatConnectionString")
         {
         }
     

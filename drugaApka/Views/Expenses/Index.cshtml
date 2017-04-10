@@ -96,15 +96,8 @@
                             case 8:
                                 {
                                     var extra = ViewBag.extraExpenses as IEnumerable<drugaApka.Models.EXPENSES>;
-                                    if (extra.All(p=>p.EXTRA_EXPENSES != null))
-                                    {
                                         sum += (extra.Where(p => p.ExpensePerMonth == item.ExpensePerMonth).Sum(p => p.EXTRA_EXPENSES.Value));
                                         <th>@String.Format("{0:c}", sum)</th>
-                                    }
-                                    else
-                                    {
-                                        <th>@String.Format("{0:c}", sum)</th>
-                                    }
                                     break;
                                 }
                             case 9:
