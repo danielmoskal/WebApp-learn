@@ -103,6 +103,7 @@ namespace drugaApka.Controllers
             DateTime date;
             RentFlatModelContainer db = new RentFlatModelContainer();
             var users = db.USERSSet;
+            var balances = db.BALANCESSet;
             if (inputDate == null || inputValue == null || user == null)
             {
                 ViewBag.error = "";
@@ -119,6 +120,18 @@ namespace drugaApka.Controllers
             paysEntity.Value = value;
             paysEntity.USERS = users.Where(p => p.USER_ID == userID).FirstOrDefault();
             db.PAYSSet.Add(paysEntity);
+
+            BALANCES balancesEntity = new BALANCES();
+            balancesEntity.PAYS = paysEntity;
+            balancesEntity.USERS = paysEntity.USERS;
+            balancesEntity.validFrom = date;
+            if (balances.Any(p => p.USERS.USER_ID == userID))
+            {
+                balancesEntity.value = balances.Where(p => p.USERS.USER_ID == userID).LastOrDefault().value + value;
+            }
+            else
+                balancesEntity.value = value;
+            db.BALANCESSet.Add(balancesEntity);
             db.SaveChanges();
             ViewBag.error = "Pomyślnie dodano do bazy!";
             return View(users.OrderBy(p => p.lastName));

@@ -1,36 +1,179 @@
 ﻿@model IEnumerable<drugaApka.Models.PAYS>
 
-<p><h2>Wpłaty</h2></p>
+<h2>Wpłaty</h2>
 
-<table class="table table-striped table-bordered table-hover">
-    <tr>
-        <th>Imię</th>                               @*@Html.DisplayNameFor(model => model.USERS.firstName)*@
-        <th>Nazwisko</th>
-        <th>Data wpłaty</th>
-        <th>Wartość wpłaty</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@if (Model.Any(p => p.USERS.USER_ID == 1))
+{
+<div class="pre-scrollable" style="height:150px">
+    <table class="table table-striped table-bordered table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.USERS.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.USERS.lastName)
-            </td>
-            <td>
-                @item.date.Date.ToString("dd/MM/yyyy")   @*Html.DisplayFor(modelItem => item.date.Date.ToString("dd/MM/yyyy"))*@
-            </td>
-            <td>
-                @String.Format("{0:c}", item.Value)
-            </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.PAY_ID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.PAY_ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.PAY_ID })
-                </td>*@
+            <th>Imię</th>              
+            <th>Nazwisko</th>
+            <th>Data wpłaty</th>
+            <th>Wartość wpłaty</th>
+            <th>Saldo po wpłacie</th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Where(p => p.USERS.USER_ID == 1))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.lastName)
+                </td>
+                <td>
+                    @item.date.Date.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.Value)
+                </td>
+                <td>
+                    @if (item.BALANCES.Any(p => p.USERS.USER_ID == item.USERS.USER_ID))
+                    {
+                        @String.Format("{0:c}", item.BALANCES.LastOrDefault().value)
+                    }
+                    else
+                    {
+                        @String.Format("{0:c}", 0)
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+}
+<br />
+<br />
+@if (Model.Any(p => p.USERS.USER_ID == 2))
+{
+<div class="pre-scrollable" style="height:150px">
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>Imię</th>                            
+            <th>Nazwisko</th>
+            <th>Data wpłaty</th>
+            <th>Wartość wpłaty</th>
+            <th>Saldo po wpłacie</th>
+        </tr>
+
+        @foreach (var item in Model.Where(p => p.USERS.USER_ID == 2))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.lastName)
+                </td>
+                <td>
+                    @item.date.Date.ToString("dd/MM/yyyy") 
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.Value)
+                </td>
+                <td>
+                    @if (item.BALANCES.Any(p => p.USERS.USER_ID == item.USERS.USER_ID))
+                    {
+                        @String.Format("{0:c}", item.BALANCES.LastOrDefault().value)
+                    }
+                    else
+                    {
+                        @String.Format("{0:c}", 0)
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+}
+<br />
+<br />
+@if (Model.Any(p => p.USERS.USER_ID == 3))
+{
+<div class="pre-scrollable" style="height:150px">
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>Imię</th> 
+            <th>Nazwisko</th>
+            <th>Data wpłaty</th>
+            <th>Wartość wpłaty</th>
+            <th>Saldo po wpłacie</th>
+        </tr>
+
+        @foreach (var item in Model.Where(p => p.USERS.USER_ID == 3))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.lastName)
+                </td>
+                <td>
+                    @item.date.Date.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.Value)
+                </td>
+                <td>
+                    @if (item.BALANCES.Any(p => p.USERS.USER_ID == item.USERS.USER_ID))
+                    {
+                        @String.Format("{0:c}", item.BALANCES.LastOrDefault().value)
+                    }
+                    else
+                    {
+                        @String.Format("{0:c}", 0)
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+}
+<br />
+<br />
+@if (Model.Any(p => p.USERS.USER_ID == 4))
+{
+<div class="pre-scrollable" style="height:150px">
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Data wpłaty</th>
+            <th>Wartość wpłaty</th>
+            <th>Saldo po wpłacie</th>
+        </tr>
+
+        @foreach (var item in Model.Where(p => p.USERS.USER_ID == 4))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERS.lastName)
+                </td>
+                <td>
+                    @item.date.Date.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.Value)
+                </td>
+                <td>
+                    @if (item.BALANCES.Any(p => p.USERS.USER_ID == item.USERS.USER_ID))
+                    {
+                        @String.Format("{0:c}", item.BALANCES.LastOrDefault().value)
+                    }
+                    else
+                    {
+                        @String.Format("{0:c}", 0)
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+}
+

@@ -11,7 +11,6 @@
           </Key>
           <Property Name="BALANCE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="validFrom" Type="date" Nullable="false" />
-          <Property Name="validTo" Type="date" />
           <Property Name="value" Type="float" Nullable="false" />
           <Property Name="PAYS_PAY_ID" Type="int" Nullable="false" />
           <Property Name="USERS_USER_ID" Type="int" Nullable="false" />
@@ -219,7 +218,6 @@
           </Key>
           <Property Name="BALANCE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="validFrom" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="validTo" Type="DateTime" Precision="0" />
           <Property Name="value" Type="Single" Nullable="false" />
           <NavigationProperty Name="PAYS" Relationship="RentFlatModel.PAYSBALANCES" FromRole="BALANCES" ToRole="PAYS" />
           <NavigationProperty Name="USERS" Relationship="RentFlatModel.USERSBALANCES" FromRole="BALANCES" ToRole="USERS" />
@@ -302,7 +300,6 @@
         <MappingFragment StoreEntitySet="BALANCESSet">
           <ScalarProperty Name="BALANCE_ID" ColumnName="BALANCE_ID" />
           <ScalarProperty Name="validFrom" ColumnName="validFrom" />
-          <ScalarProperty Name="validTo" ColumnName="validTo" />
           <ScalarProperty Name="value" ColumnName="value" />
         </MappingFragment>
       </EntityTypeMapping>

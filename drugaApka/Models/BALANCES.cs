@@ -16,7 +16,6 @@ namespace drugaApka.Models
     {
         public int BALANCE_ID { get; set; }
         public System.DateTime validFrom { get; set; }
-        public Nullable<System.DateTime> validTo { get; set; }
         public float value { get; set; }
     
         public virtual PAYS PAYS { get; set; }

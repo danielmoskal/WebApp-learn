@@ -335,9 +335,6 @@
     <Content Include="Views\AddData\AddExpense.cshtml" />
     <Content Include="Views\AddData\AddExtraExpense.cshtml" />
     <Content Include="Views\AddData\AddPay.cshtml" />
-    <Content Include="Views\Pays\Delete.cshtml" />
-    <Content Include="Views\Pays\Details.cshtml" />
-    <Content Include="Views\Pays\Edit.cshtml" />
     <Content Include="Views\Pays\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
