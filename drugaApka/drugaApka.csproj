@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageCarsController.cs" />
+    <Compile Include="Controllers\PaysController.cs" />
     <Compile Include="Controllers\RentFlatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -333,6 +334,11 @@
     <Content Include="Views\AddData\Index.cshtml" />
     <Content Include="Views\AddData\AddExpense.cshtml" />
     <Content Include="Views\AddData\AddExtraExpense.cshtml" />
+    <Content Include="Views\AddData\AddPay.cshtml" />
+    <Content Include="Views\Pays\Delete.cshtml" />
+    <Content Include="Views\Pays\Details.cshtml" />
+    <Content Include="Views\Pays\Edit.cshtml" />
+    <Content Include="Views\Pays\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

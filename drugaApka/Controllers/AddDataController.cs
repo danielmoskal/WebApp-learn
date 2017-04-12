@@ -78,7 +78,7 @@ namespace drugaApka.Controllers
             if (inputName == null || inputValue == null)
             {
                 ViewBag.error = "";
-                return View(extra.OrderBy(p=>p.Name));
+                return View(extra.OrderBy(p => p.Name));
             }
             if (inputName == "" || inputValue == "" || !float.TryParse(inputValue, out value))
             {
@@ -93,6 +93,36 @@ namespace drugaApka.Controllers
             db.SaveChanges();
             ViewBag.error = "Pomyślnie dodano do bazy!";
             return View(extra.OrderBy(p => p.Name));
+
         }
+
+        public ActionResult AddPay(string inputDate, string inputValue, string user)
+        {
+            float value;
+            int userID;
+            DateTime date;
+            RentFlatModelContainer db = new RentFlatModelContainer();
+            var users = db.USERSSet;
+            if (inputDate == null || inputValue == null || user == null)
+            {
+                ViewBag.error = "";
+                return View(users.OrderBy(p => p.lastName));
+            }
+            if (!DateTime.TryParse(inputDate, out date) || inputValue == "" || !float.TryParse(inputValue, out value) || !int.TryParse(user, out userID))
+            {
+                ViewBag.error = "Nieprawidłowa data, wartość lub użytkownik";
+                return View(users.OrderBy(p => p.lastName));
+            }
+
+            PAYS paysEntity = new PAYS();
+            paysEntity.date = date;
+            paysEntity.Value = value;
+            paysEntity.USERS = users.Where(p => p.USER_ID == userID).FirstOrDefault();
+            db.PAYSSet.Add(paysEntity);
+            db.SaveChanges();
+            ViewBag.error = "Pomyślnie dodano do bazy!";
+            return View(users.OrderBy(p => p.lastName));
+        }
+
     }
 }

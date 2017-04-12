@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace drugaApka.Controllers
 {
@@ -12,6 +13,7 @@ namespace drugaApka.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("pl-PL");
             List<Month> months = new List<Month>();
             months.Add(new Month { MonthID = 1, MonthName = "Styczeń" });
             months.Add(new Month { MonthID = 2, MonthName = "Luty" });
