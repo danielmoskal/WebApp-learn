@@ -5,10 +5,12 @@
     <div class="row">
         @{
             DateTime update = new DateTime();
-            if(Model.Any(p=>p.BALANCES.LastOrDefault().validFrom != null))
+            var balances = ViewBag.balances as IEnumerable<drugaApka.Models.BALANCES>;
+            if (balances.Any() != false)
             {
-                update = Model.Where(p => p.BALANCES.LastOrDefault().validFrom != null).LastOrDefault().BALANCES.LastOrDefault().validFrom;
+                update = balances.LastOrDefault().validFrom;
             }
+
             }
         <div class="col-lg-3 col-lg-offset-9"><pre><strong>Aktualizacja:  <font size="4">@update.Date.ToString("dd/MM/yyyy")</font></strong></pre></div>
     </div>
@@ -32,7 +34,7 @@
                 float? expensesValue = 0;
                 if (Model.All(p => p.PAYS.Any() != false))
                 {
-                    if (Model.All(p => p.PAYS.LastOrDefault().date.Month == DateTime.Now.Month))
+                    if (Model.All(p => p.PAYS.Any(x=>x.date.Month == DateTime.Now.Month)))
                     {
                         date = DateTime.Now.AddMonths(1);
                     }
@@ -50,7 +52,7 @@
             {
                 if (item.PAYS.Any() != false)
                 {
-                    if (item.PAYS.LastOrDefault().date.Month == date.Month)
+                    if (item.PAYS.Any(p=>p.date.Month == date.Month))
                     {
                         payed = "success";
                     }
@@ -71,18 +73,24 @@
                 @date.ToString("MMMM")
             </td>
             <td>
-                04.@date.ToString("MM").2017          @*@DateTime.Now.Date.ToString("MM")*@
+                04.@date.ToString("MM").2017
 
             </td>
-
-            @if (item.BALANCES.Any() != false)
+            @if (payed == "success")
             {
-                var amount = 400 - @item.BALANCES.LastOrDefault().value;
-                <td>@amount</td>
+                <td> </td>
             }
             else
             {
-                <td>400</td>
+                if (item.BALANCES.Any() != false)
+                {
+                    var amount = 400 - @item.BALANCES.FirstOrDefault().value;
+                    <td>@amount</td>
+                }
+                else
+                {
+                    <td>400</td>
+                }
             }
 
             @if (payed == "success")
@@ -96,7 +104,7 @@
 
             @if (item.BALANCES.Any() != false)
             {
-                <td>@item.BALANCES.LastOrDefault().value</td>
+                <td>@item.BALANCES.FirstOrDefault().value</td>
             }
             else
             {

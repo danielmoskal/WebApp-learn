@@ -74,7 +74,13 @@ namespace drugaApka.Controllers
                 ViewBag.error = "Nieprawidłowy dodatkowy wydatek!";
                 return View(extraEntity);
             }
-            var sumOfExpenses = (rent + rentalFee + current + gas + internet)/4;
+            float sumOfExpenses = 0;
+            float? extraExp = 0;
+            if(extraEntity.Any(p=>p.EXTRA_EXPENSES_ID == extraToInt && p.Value != null))
+            {
+                extraExp = extraEntity.Where(p => p.EXTRA_EXPENSES_ID == extraToInt).ToList().LastOrDefault().Value;
+            }
+            sumOfExpenses = (rent + rentalFee + current + gas + internet + extraExp.Value) / 4;
             entity.EXTRA_EXPENSES = extraEntity.Where(p => p.EXTRA_EXPENSES_ID == extraToInt).FirstOrDefault();
             db2.EXPENSESSet.Add(entity);
 

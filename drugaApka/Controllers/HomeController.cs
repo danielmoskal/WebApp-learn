@@ -12,7 +12,8 @@ namespace drugaApka.Controllers
         RentFlatModelContainer db = new RentFlatModelContainer();
         public ActionResult Index()
         {
-            ViewBag.counter = 0;
+            var balances = db.BALANCESSet;
+            ViewBag.balances = balances.OrderBy(p => p.validFrom);
             var users = db.USERSSet;
             return View(users.Where(p=>p.USER_ID != 1));
         }
