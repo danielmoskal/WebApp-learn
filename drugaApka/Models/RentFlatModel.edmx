@@ -12,7 +12,7 @@
           <Property Name="BALANCE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="validFrom" Type="date" Nullable="false" />
           <Property Name="value" Type="float" Nullable="false" />
-          <Property Name="PAYS_PAY_ID" Type="int" Nullable="false" />
+          <Property Name="PAYS_PAY_ID" Type="int" />
           <Property Name="USERS_USER_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EXPENSESSet">
@@ -87,7 +87,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PAYSBALANCES">
-          <End Role="PAYSSet" Type="Self.PAYSSet" Multiplicity="1" />
+          <End Role="PAYSSet" Type="Self.PAYSSet" Multiplicity="0..1" />
           <End Role="BALANCESSet" Type="Self.BALANCESSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PAYSSet">
@@ -223,7 +223,7 @@
           <NavigationProperty Name="USERS" Relationship="RentFlatModel.USERSBALANCES" FromRole="BALANCES" ToRole="USERS" />
         </EntityType>
         <Association Name="PAYSBALANCES">
-          <End Type="RentFlatModel.PAYS" Role="PAYS" Multiplicity="1" />
+          <End Type="RentFlatModel.PAYS" Role="PAYS" Multiplicity="0..1" />
           <End Type="RentFlatModel.BALANCES" Role="BALANCES" Multiplicity="*" />
         </Association>
         <EntityType Name="USERS">
@@ -359,6 +359,7 @@
       <EndProperty Name="BALANCES">
         <ScalarProperty Name="BALANCE_ID" ColumnName="BALANCE_ID" />
       </EndProperty>
+            <Condition ColumnName="PAYS_PAY_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="USERSPAYS" TypeName="RentFlatModel.USERSPAYS" StoreEntitySet="PAYSSet">
       <EndProperty Name="USERS">

@@ -1,44 +1,108 @@
 ﻿@model IEnumerable<drugaApka.Models.USERS>
 <p><h2>Wpłata w następnym miesiącu</h2></p>
 
-    <table class="table table-striped table-bordered table-hover">
-        <tr>
-            <th>Imię i Nazwisko</th>
-            <th>Za miesiąc</th>
-            <th>Wpłata do dnia</th>
-            <th>Kwota wpłaty</th>
-            <th>Wpłacone</th>
-            <th>Saldo</th>
-        </tr>
+<div class="container-fluid">
+    <div class="row">
+        @{
+            DateTime update = new DateTime();
+            if(Model.Any(p=>p.BALANCES.LastOrDefault().validFrom != null))
+            {
+                update = Model.Where(p => p.BALANCES.LastOrDefault().validFrom != null).LastOrDefault().BALANCES.LastOrDefault().validFrom;
+            }
+            }
+        <div class="col-lg-3 col-lg-offset-9"><pre><strong>Aktualizacja:  <font size="4">@update.Date.ToString("dd/MM/yyyy")</font></strong></pre></div>
+    </div>
+</div>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.firstName  @item.lastName
-                </td>
-                <td>
-                    kwiecien
-                </td>
-                <td>
-                    04.@DateTime.Now.Date.ToString("MM").2017
-                  </td>
-  
-                  <td>
-                      400
-                  </td>
-                      @if (item.PAYS.LastOrDefault().date.Month == DateTime.Now.Month)
-                      {
-                          <td>tak</td>
-                      }
-                      else
-                      {
-                          <td>nie</td>
-                      }
-                  <td>
-                      1000
-                  </td>
-  
-              </tr>
-        }
-    </table>
+
+
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Imię i Nazwisko</th>
+        <th>Za miesiąc</th>
+        <th>Wpłata do dnia</th>
+        <th>Kwota wpłaty</th>
+        <th>Wpłacone</th>
+        <th>Saldo</th>
+    </tr>
+    @{
+                DateTime date = new DateTime();
+                date = DateTime.Now;
+                string payed = "";
+                float? expensesValue = 0;
+                if (Model.All(p => p.PAYS.Any() != false))
+                {
+                    if (Model.All(p => p.PAYS.LastOrDefault().date.Month == DateTime.Now.Month))
+                    {
+                        date = DateTime.Now.AddMonths(1);
+                    }
+                }
+                if (Model.All(p=>p.USERS_EXPENSES.Any() != false))
+                {
+                    expensesValue = Model.Where(k => k.USERS_EXPENSES != null).Sum(x => x.USERS_EXPENSES.Where(z=>z.EXPENSES.RentalFee != null && z.EXPENSES.ExpensePerMonth.ToLower() == date.ToString("MMMM").ToLower()).Sum(p => p.EXPENSES.RentalFee));
+                    expensesValue += Model.Where(k => k.USERS_EXPENSES != null).Sum(x => x.USERS_EXPENSES.Where(z => z.EXPENSES.Rent != null && z.EXPENSES.ExpensePerMonth.ToLower() == date.ToString("MMMM").ToLower()).Sum(p => p.EXPENSES.Rent));
+                    expensesValue += Model.Where(k => k.USERS_EXPENSES != null).Sum(x => x.USERS_EXPENSES.Where(z => z.EXPENSES.CurrentBill != null && z.EXPENSES.ExpensePerMonth.ToLower() == date.ToString("MMMM").ToLower()).Sum(p => p.EXPENSES.CurrentBill));
+                    expensesValue += Model.Where(k => k.USERS_EXPENSES != null).Sum(x => x.USERS_EXPENSES.Where(z => z.EXPENSES.GasBill != null && z.EXPENSES.ExpensePerMonth.ToLower() == date.ToString("MMMM").ToLower()).Sum(p => p.EXPENSES.GasBill));
+                    expensesValue += Model.Where(k => k.USERS_EXPENSES != null).Sum(x => x.USERS_EXPENSES.Where(z => z.EXPENSES.InternetBill != null && z.EXPENSES.ExpensePerMonth.ToLower() == date.ToString("MMMM").ToLower()).Sum(p => p.EXPENSES.InternetBill));
+                }
+            }
+    @foreach (var item in Model)
+            {
+                if (item.PAYS.Any() != false)
+                {
+                    if (item.PAYS.LastOrDefault().date.Month == date.Month)
+                    {
+                        payed = "success";
+                    }
+                    else
+                    {
+                        payed = "danger";
+                    }
+                }
+                else
+                {
+                    payed = "danger";
+                }
+        <tr class="@payed">
+            <td>
+                @item.firstName  @item.lastName
+            </td>
+            <td>
+                @date.ToString("MMMM")
+            </td>
+            <td>
+                04.@date.ToString("MM").2017          @*@DateTime.Now.Date.ToString("MM")*@
+
+            </td>
+
+            @if (item.BALANCES.Any() != false)
+            {
+                var amount = 400 - @item.BALANCES.LastOrDefault().value;
+                <td>@amount</td>
+            }
+            else
+            {
+                <td>400</td>
+            }
+
+            @if (payed == "success")
+            {
+                <th>tak</th>
+            }
+            else
+            {
+                <th>nie</th>
+            }
+
+            @if (item.BALANCES.Any() != false)
+            {
+                <td>@item.BALANCES.LastOrDefault().value</td>
+            }
+            else
+            {
+                <td>0</td>
+            }
+
+        </tr>
+    }
+</table>

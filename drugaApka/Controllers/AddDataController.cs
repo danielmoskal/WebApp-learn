@@ -23,7 +23,18 @@ namespace drugaApka.Controllers
             RentFlatModelContainer db2 = new RentFlatModelContainer();
             EXPENSES entity = new EXPENSES();
             EXTRA_EXPENSES ex = new EXTRA_EXPENSES();
+            USERS_EXPENSES usExpD = new USERS_EXPENSES();
+            USERS_EXPENSES usExpM = new USERS_EXPENSES();
+            USERS_EXPENSES usExpK = new USERS_EXPENSES();
+            USERS_EXPENSES usExpJ = new USERS_EXPENSES();
+            BALANCES balD = new BALANCES();
+            BALANCES balM = new BALANCES();
+            BALANCES balK = new BALANCES();
+            BALANCES balJ = new BALANCES();
+            var users = db2.USERSSet;
             var extraEntity = db2.EXTRA_EXPENSESSet;
+            var balances = db2.BALANCESSet;
+
             if (inputRentalFee == null || inputRent == null || inputCurrent == null || inputGas == null || inputInternet == null)
             {
                 ViewBag.error = "";
@@ -63,8 +74,67 @@ namespace drugaApka.Controllers
                 ViewBag.error = "Nieprawidłowy dodatkowy wydatek!";
                 return View(extraEntity);
             }
+            var sumOfExpenses = (rent + rentalFee + current + gas + internet)/4;
             entity.EXTRA_EXPENSES = extraEntity.Where(p => p.EXTRA_EXPENSES_ID == extraToInt).FirstOrDefault();
             db2.EXPENSESSet.Add(entity);
+
+            usExpD.USERS = users.Where(p=>p.USER_ID == 1).FirstOrDefault();
+            usExpD.EXPENSES = entity;
+            db2.USERS_EXPENSESSet.Add(usExpD);
+
+            usExpM.USERS = users.Where(p => p.USER_ID == 2).FirstOrDefault();
+            usExpM.EXPENSES = entity;
+            db2.USERS_EXPENSESSet.Add(usExpM);
+
+            usExpK.USERS = users.Where(p => p.USER_ID == 3).FirstOrDefault();
+            usExpK.EXPENSES = entity;
+            db2.USERS_EXPENSESSet.Add(usExpK);
+
+            usExpJ.USERS = users.Where(p => p.USER_ID == 4).FirstOrDefault();
+            usExpJ.EXPENSES = entity;
+            db2.USERS_EXPENSESSet.Add(usExpJ);
+
+            balD.USERS = usExpD.USERS;
+            balD.validFrom = entity.ExpenseDate;
+            if (balances.Any(p => p.USERS.USER_ID == usExpD.USERS.USER_ID))
+            {
+                balD.value = balances.Where(p => p.USERS.USER_ID == usExpD.USERS.USER_ID).ToList().LastOrDefault().value - sumOfExpenses;
+            }
+            else
+                balD.value = -sumOfExpenses;
+
+            balM.USERS = usExpM.USERS;
+            balM.validFrom = entity.ExpenseDate;
+            if (balances.Any(p => p.USERS.USER_ID == usExpM.USERS.USER_ID))
+            {
+                balM.value = balances.Where(p => p.USERS.USER_ID == usExpM.USERS.USER_ID).ToList().LastOrDefault().value - sumOfExpenses;
+            }
+            else
+                balM.value = -sumOfExpenses;
+
+            balK.USERS = usExpK.USERS;
+            balK.validFrom = entity.ExpenseDate;
+            if (balances.Any(p => p.USERS.USER_ID == usExpK.USERS.USER_ID))
+            {
+                balK.value = balances.Where(p => p.USERS.USER_ID == usExpK.USERS.USER_ID).ToList().LastOrDefault().value - sumOfExpenses;
+            }
+            else
+                balK.value = -sumOfExpenses;
+
+            balJ.USERS = usExpJ.USERS;
+            balJ.validFrom = entity.ExpenseDate;
+            if (balances.Any(p => p.USERS.USER_ID == usExpJ.USERS.USER_ID))
+            {
+                balJ.value = balances.Where(p => p.USERS.USER_ID == usExpJ.USERS.USER_ID).ToList().LastOrDefault().value - sumOfExpenses;
+            }
+            else
+                balJ.value = -sumOfExpenses;
+
+            db2.BALANCESSet.Add(balD);
+            db2.BALANCESSet.Add(balM);
+            db2.BALANCESSet.Add(balK);
+            db2.BALANCESSet.Add(balJ);
+
             db2.SaveChanges();
             ViewBag.error = "Pomyślnie dodano do bazy!";
             return View(extraEntity);
@@ -127,7 +197,7 @@ namespace drugaApka.Controllers
             balancesEntity.validFrom = date;
             if (balances.Any(p => p.USERS.USER_ID == userID))
             {
-                balancesEntity.value = balances.Where(p => p.USERS.USER_ID == userID).LastOrDefault().value + value;
+                balancesEntity.value = balances.Where(p => p.USERS.USER_ID == userID).ToList().LastOrDefault().value + value;
             }
             else
                 balancesEntity.value = value;
