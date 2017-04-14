@@ -21,7 +21,7 @@ namespace drugaApka.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("RentFlatConnectionString", throwIfV1Schema: false)
+            : base("DefaultConnection2", throwIfV1Schema: false)
         {
         }
 
