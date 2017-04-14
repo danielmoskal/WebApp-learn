@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Wynajem Mieszkania - Hetmańska</title>
     @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,6 +25,7 @@
                     <li>@Html.ActionLink("Wydatki", "Index", "Expenses")</li>
                     <li>@Html.ActionLink("Dodaj", "Index", "AddData")</li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
@@ -31,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>@DateTime.Now.Year - My first homepage</p>
+            <p>&copy; @DateTime.Now.Year - Daniel Moskal</p>
         </footer>
     </div>
 
