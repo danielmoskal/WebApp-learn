@@ -84,7 +84,7 @@
             {
                 if (item.BALANCES.Any() != false)
                 {
-                    var amount = 400 - @item.BALANCES.FirstOrDefault().value;
+                    var amount = 400 - @item.BALANCES.OrderBy(p=>p.BALANCE_ID).LastOrDefault().value;
                     <td>@String.Format("{0:c}", amount)</td>
                 }
                 else
@@ -104,7 +104,7 @@
 
             @if (item.BALANCES.Any() != false)
             {
-                <td>@String.Format("{0:c}", item.BALANCES.FirstOrDefault().value)</td>
+                <td>@String.Format("{0:c}", item.BALANCES.OrderBy(p => p.BALANCE_ID).LastOrDefault().value)</td>
             }
             else
             {
