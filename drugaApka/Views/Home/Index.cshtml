@@ -85,7 +85,7 @@
                 if (item.BALANCES.Any() != false)
                 {
                     var amount = 400 - @item.BALANCES.FirstOrDefault().value;
-                    <td>@amount</td>
+                    <td>@String.Format("{0:c}", amount)</td>
                 }
                 else
                 {
@@ -104,11 +104,11 @@
 
             @if (item.BALANCES.Any() != false)
             {
-                <td>@item.BALANCES.FirstOrDefault().value</td>
+                <td>@String.Format("{0:c}", item.BALANCES.FirstOrDefault().value)</td>
             }
             else
             {
-                <td>0</td>
+                <td>@String.Format("{0:c}", 0)</td>
             }
 
         </tr>

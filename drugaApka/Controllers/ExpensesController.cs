@@ -19,6 +19,11 @@ namespace drugaApka.Controllers
             months.Add(new Month { MonthID = 2, MonthName = "Luty" });
             months.Add(new Month { MonthID = 3, MonthName = "Marzec" });
             months.Add(new Month { MonthID = 4, MonthName = "Kwiecień" });
+            months.Add(new Month { MonthID = 4, MonthName = "Maj" });
+            months.Add(new Month { MonthID = 4, MonthName = "Czerwiec" });
+            months.Add(new Month { MonthID = 4, MonthName = "Lipiec" });
+            months.Add(new Month { MonthID = 4, MonthName = "Sierpień" });
+            months.Add(new Month { MonthID = 4, MonthName = "Wrzesień" });
 
             RentFlatModelContainer db = new RentFlatModelContainer();
             var expenses = db.EXPENSESSet;
