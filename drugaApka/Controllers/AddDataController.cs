@@ -10,11 +10,12 @@ namespace drugaApka.Controllers
     public class AddDataController : Controller
     {
         // GET: AddData
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult AddExpense(string inputRentalFee, string inputRent, string inputCurrent, string inputGas, string inputInternet, string inputDate, string month, string extra)
         {
             float rentalFee, rent, current, gas, internet;
@@ -145,7 +146,7 @@ namespace drugaApka.Controllers
             ViewBag.error = "Pomyślnie dodano do bazy!";
             return View(extraEntity);
         }
-
+        [Authorize]
         public ActionResult AddExtraExpense(string inputName, string inputValue)
         {
             float value;
@@ -171,7 +172,7 @@ namespace drugaApka.Controllers
             return View(extra.OrderBy(p => p.Name));
 
         }
-
+        [Authorize]
         public ActionResult AddPay(string inputDate, string inputValue, string user)
         {
             float value;

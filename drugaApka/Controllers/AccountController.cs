@@ -136,6 +136,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/Register
+        [NonAction]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -144,6 +145,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/Register
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -174,6 +176,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ConfirmEmail
+        [NonAction]
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -187,6 +190,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ForgotPassword
+        [NonAction]
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
@@ -195,6 +199,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/ForgotPassword
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -223,6 +228,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ForgotPasswordConfirmation
+        [NonAction]
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
@@ -231,6 +237,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ResetPassword
+        [NonAction]
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -239,6 +246,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/ResetPassword
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -265,6 +273,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ResetPasswordConfirmation
+        [NonAction]
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
@@ -273,6 +282,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/ExternalLogin
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -284,6 +294,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/SendCode
+        [NonAction]
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -299,6 +310,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/SendCode
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -319,6 +331,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
+        [NonAction]
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -349,6 +362,7 @@ namespace drugaApka.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
+        [NonAction]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -397,6 +411,7 @@ namespace drugaApka.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
+        [NonAction]
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
