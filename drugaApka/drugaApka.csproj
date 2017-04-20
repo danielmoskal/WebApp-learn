@@ -217,32 +217,14 @@
     <Compile Include="Controllers\AddDataController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageCarsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaysController.cs" />
-    <Compile Include="Controllers\RentFlatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BALANCES.cs">
       <DependentUpon>RentFlatModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EXPENSES.cs">
       <DependentUpon>RentFlatModel.tt</DependentUpon>
@@ -271,9 +253,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RentFlatModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Samochod.cs">
-      <DependentUpon>CarModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\USERS.cs">
       <DependentUpon>RentFlatModel.tt</DependentUpon>
     </Compile>
@@ -292,16 +271,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\CarModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarModel.edmx</DependentUpon>
-      <LastGenOutput>CarModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CarModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarModel.edmx</DependentUpon>
-      <LastGenOutput>CarModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\RentFlatModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RentFlatModel.Context.cs</LastGenOutput>
@@ -315,13 +284,6 @@
     </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\CarModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CarModel.edmx.diagram">
-      <DependentUpon>CarModel.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\RentFlatModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -364,11 +326,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ManageCars\Add.cshtml" />
-    <Content Include="Views\ManageCars\View.cshtml" />
-    <Content Include="Views\ManageCars\Search.cshtml" />
-    <Content Include="Views\RentFlat\Index.cshtml" />
-    <Content Include="Views\RentFlat\PayMoney.cshtml" />
     <Content Include="Views\Expenses\Details.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Expenses\SearchDetails.cshtml" />
@@ -402,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

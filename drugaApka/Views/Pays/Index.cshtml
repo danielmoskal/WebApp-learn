@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<drugaApka.Models.PAYS>
-
+@{
+    ViewBag.Title = "Wpłaty";
+}
 <h2>Wpłaty</h2>
 
 @if (Model.Any(p => p.USERS.USER_ID == 2))
