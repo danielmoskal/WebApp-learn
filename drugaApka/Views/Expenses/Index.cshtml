@@ -5,8 +5,10 @@
 
 <div class="container">
     <div class="row">
-        <a class="btn btn-primary btn-lg" href="~/Expenses/SearchDetails">Szczegółowe wydatki</a><button class="btn btn-default btn-lg">Inny</button>
-        <div class="col-lg-12"><font size="5"><p class="text-center"><strong>Wydatki</strong></p></font></div>
+        <a class="btn btn-primary btn-lg" href="~/Expenses/SearchDetails">Szczegółowe wydatki</a>
+    </div>
+    <div class="row">
+        <div class="center-block"><font size="6"><p class="text-center"><strong>Wydatki</strong></p></font></div>
     </div>
 </div>
 
@@ -23,7 +25,7 @@
                 <th>Suma</th>
                 <th>Dodatkowe</th>
                 <th>Suma łączna</th>
-                <th>na osobę</th>
+                <th>Na osobę</th>
             </tr>
         </thead>
         <tbody>
@@ -42,27 +44,27 @@
                                 }
                             case 1:
                                 {
-                                    <th>@String.Format("{0:c}", item.RentalFee)</th>
+                                    <td>@String.Format("{0:c}", item.RentalFee)</td>
                                     break;
                                 }
                             case 2:
                                 {
-                                    <th>@String.Format("{0:c}", item.Rent)</th>
+                                    <td>@String.Format("{0:c}", item.Rent)</td>
                                     break;
                                 }
                             case 3:
                                 {
-                                    <th>@String.Format("{0:c}", item.CurrentBill)</th>
+                                    <td>@String.Format("{0:c}", item.CurrentBill)</td>
                                     break;
                                 }
                             case 4:
                                 {
-                                    <th>@String.Format("{0:c}", item.GasBill)</th>
+                                    <td>@String.Format("{0:c}", item.GasBill)</td>
                                     break;
                                 }
                             case 5:
                                 {
-                                    <th>@String.Format("{0:c}", item.InternetBill)</th>
+                                    <td>@String.Format("{0:c}", item.InternetBill)</td>
                                     break;
                                 }
                             case 6:
@@ -85,7 +87,7 @@
                                     else { internet = item.InternetBill; }
 
                                     sum = rentalFee + rent + current + gas + internet;
-                                    <th>@String.Format("{0:c}", sum)</th>
+                                    <td>@String.Format("{0:c}", sum)</td>
                                     break;
                                 }
                             case 7:

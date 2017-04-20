@@ -63,7 +63,7 @@ namespace drugaApka.Controllers
         {
             RentFlatModelContainer db = new RentFlatModelContainer();
             var expenses = db.EXPENSESSet;
-            return View(expenses);
+            return View(expenses.OrderBy(p => p.ExpenseDate));
         }
 
 
@@ -98,10 +98,10 @@ namespace drugaApka.Controllers
             RentFlatModelContainer db = new RentFlatModelContainer();
             List<EXTRA_EXPENSES> extraList = new List<EXTRA_EXPENSES>();
             var expenses = db.EXPENSESSet;
-            var extraExpenses = expenses.Where(p => p.EXTRA_EXPENSES != null);
+            var extraExpenses = expenses.Where(p => p.EXTRA_EXPENSES.EXTRA_EXPENSES_ID != -1);
             if (month != null && month != "")
             {
-                var extra = expenses.Where(p=>p.EXTRA_EXPENSES != null && p.ExpensePerMonth == month);
+                var extra = expenses.Where(p=>p.EXTRA_EXPENSES.EXTRA_EXPENSES_ID != -1 && p.ExpensePerMonth == month);
                 return View(extra.OrderBy(p => p.ExpenseDate));
             }
             return View(extraExpenses.OrderBy(p=>p.ExpenseDate));

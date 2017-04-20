@@ -7,8 +7,8 @@
 <p><h2>Szukane wydatki</h2></p>
 
 
-    <div class="container">
-        <table class="table table-striped table-bordered">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Miesiac</th>
@@ -17,7 +17,7 @@
                     <th>Prąd</th>
                     <th>Gaz</th>
                     <th>Internet</th>
-                    <th>Dodatkowe</th>
+                    <th>Dodatkowe wydatki</th>
                     <th>Data zapłaty</th>
                 </tr>
             </thead>
@@ -33,27 +33,29 @@
                                     <th>@item.ExpensePerMonth</th>
                                     break;
                                 case 1:
-                                    <th>@item.RentalFee</th>
+                                    <td>@String.Format("{0:c}", item.RentalFee)</td>
                                     break;
                                 case 2:
-                                    <th>@item.Rent</th>
+                                    <td>@String.Format("{0:c}", item.Rent)</td>
                                     break;
                                 case 3:
-                                    <th>@item.CurrentBill</th>
+                                    <td>@String.Format("{0:c}", item.CurrentBill)</td>
                                     break;
                                 case 4:
-                                    <th>@item.GasBill</th>
+                                    <td>@String.Format("{0:c}", item.GasBill)</td>
                                     break;
                                 case 5:
-                                    <th>@item.InternetBill</th>
+                                    <td>@String.Format("{0:c}", item.InternetBill)</td>
                                     break;
                                 case 6:
-                                    <th>
-                                        @if (@item.EXTRA_EXPENSES != null)
+                                        if (item.EXTRA_EXPENSES.EXTRA_EXPENSES_ID != -1)
                                         {
-                                            <p>@item.EXTRA_EXPENSES.Name - @item.EXTRA_EXPENSES.Value</p>
+                                            <td>@item.EXTRA_EXPENSES.Name - @String.Format("{0:c}", item.EXTRA_EXPENSES.Value)</td>
                                         }
-                                    </th>
+                                        else
+                                        {
+                                            <td>BRAK!</td>
+                                        }
                                     break;
                                 case 7:
                                     <th>@item.ExpenseDate.ToString("dd/MM/yyyy")</th>

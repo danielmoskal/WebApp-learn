@@ -2,57 +2,13 @@
 
 <h2>Wpłaty</h2>
 
-@if (Model.Any(p => p.USERS.USER_ID == 1))
-{
-<div class="pre-scrollable" style="height:150px">
-    <table class="table table-striped table-bordered table-hover">
-        <tr>
-            <th>Imię</th>              
-            <th>Nazwisko</th>
-            <th>Data wpłaty</th>
-            <th>Wartość wpłaty</th>
-            <th>Saldo po wpłacie</th>
-        </tr>
-
-        @foreach (var item in Model.Where(p => p.USERS.USER_ID == 1))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USERS.firstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USERS.lastName)
-                </td>
-                <td>
-                    @item.date.Date.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @String.Format("{0:c}", item.Value)
-                </td>
-                <td>
-                    @if (item.BALANCES.Any(p => p.USERS.USER_ID == item.USERS.USER_ID))
-                    {
-                        @String.Format("{0:c}", item.BALANCES.LastOrDefault().value)
-                    }
-                    else
-                    {
-                        @String.Format("{0:c}", 0)
-                    }
-                </td>
-            </tr>
-        }
-    </table>
-</div>
-}
-<br />
-<br />
 @if (Model.Any(p => p.USERS.USER_ID == 2))
 {
+<h3>Maciej</h3>
 <div class="pre-scrollable" style="height:150px">
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Imię</th>                            
-            <th>Nazwisko</th>
             <th>Data wpłaty</th>
             <th>Wartość wpłaty</th>
             <th>Saldo po wpłacie</th>
@@ -63,9 +19,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.USERS.firstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USERS.lastName)
                 </td>
                 <td>
                     @item.date.Date.ToString("dd/MM/yyyy") 
@@ -92,11 +45,11 @@
 <br />
 @if (Model.Any(p => p.USERS.USER_ID == 3))
 {
+    <h3>Karol</h3>
 <div class="pre-scrollable" style="height:150px">
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Imię</th> 
-            <th>Nazwisko</th>
             <th>Data wpłaty</th>
             <th>Wartość wpłaty</th>
             <th>Saldo po wpłacie</th>
@@ -107,9 +60,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.USERS.firstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USERS.lastName)
                 </td>
                 <td>
                     @item.date.Date.ToString("dd/MM/yyyy")
@@ -136,11 +86,11 @@
 <br />
 @if (Model.Any(p => p.USERS.USER_ID == 4))
 {
+    <h3>Jacek</h3>
 <div class="pre-scrollable" style="height:150px">
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Imię</th>
-            <th>Nazwisko</th>
             <th>Data wpłaty</th>
             <th>Wartość wpłaty</th>
             <th>Saldo po wpłacie</th>
@@ -151,9 +101,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.USERS.firstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USERS.lastName)
                 </td>
                 <td>
                     @item.date.Date.ToString("dd/MM/yyyy")

@@ -18,7 +18,7 @@ namespace drugaApka.Controllers
         public ActionResult Index()
         {
             var pays = db.PAYSSet;
-            return View(pays.OrderBy(p=>p.date));
+            return View(pays.Where(p=>p.USERS.USER_ID != 1).OrderBy(p=>p.date));
         }
     }
 }
